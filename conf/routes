@@ -8,8 +8,51 @@ GET     /                           controllers.Application.index
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
-GET     /got                        controllers.Application.got
+# Have a URI that would after getting called by the browser would redirect you to some page of your choice
+GET     /redirect                   controllers.Application.redirect
 
-GET     /name                       controllers.Application.hello(name: String)
+# URI for dynamic
+GET     /dynamic/:input             controllers.Application.dynamic(input)
+# static
+GET     /static                     controllers.Application.static
+# default
+GET     /default                    controllers.Application.default(string: String ?= "Default")
+# set
+GET     /set                        controllers.Application.set(string: String = "Set String")
+# optional
+GET     /optional                   controllers.Application.optional(option: Option[String])
+# ok
+GET     /ok                         controllers.Application.helperOk
+# Not Found
+GET     /notfound                   controllers.Application.helperNotFound
+# Page not found
+GET     /pagenotfound               controllers.Application.helperPageNotFound
+# Bad Request
+GET     /badRequest                 controllers.Application.helperBadRequest
+# Oops
+GET     /oops                       controllers.Application.helperOops
+# Any status
+GET     /anystatus                  controllers.Application.helperAnyStatus
+# Reverse route
+GET     /hello/:name                controllers.Application.hello(name)
+GET     /hellobob                   controllers.Application.helloBob
+# TODO
+GET     /todo                       controllers.Application.todo
+#•	Have two routes that are the same but point to different Actions, which one will be called?
+GET     /sameroute                  controllers.Application.sameRoute1
+GET     /sameroute                  controllers.Application.sameRoute2
+#•	Test out default controller and see what results does it show for the supported methods
+GET   /google                       controllers.Default.redirect(to = "http://www.google.com")
+GET   /favicon.ico                  controllers.Default.notFound
+GET   /admin                        controllers.Default.todo
+GET   /xxx                          controllers.Default.error
+# •	Try to use cookies/session/flash scope for your Actions and figure out how to print them out onto the page
+#   o	Change the cookie name
+#   o	Find a way to discard all of them
+GET   /createcookie                  controllers.Application.createCookie
+GET   /viewcookie                    controllers.Application.viewCookie
+GET   /deletecookie                  controllers.Application.deleteCookie
 
-GET     /head                       controllers.Application.head
+GET   /createsession                  controllers.Application.createSession
+GET   /viewsession                    controllers.Application.viewSession
+# GET   /deletesession                controllers.Application.deleteSession
